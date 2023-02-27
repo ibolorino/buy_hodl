@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+
+  buy_hodl_backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: "uvicorn wsgi:application --reload --host 0.0.0.0 --port 8000"
+    volumes:
+      - .:/buy_hodl
+    ports:
+      - "8000:8000"
+    depends_on:
+      - buy_hodl_db
+
+
+  buy_hodl_db:
+    image: postgres:latest
+    container_name: buy_hodl_db
+    restart: always
+    env_file:
+      - "./.env"
+    volumes:
+      - postgresql_db_data:/var/lib/postgresql/data/
+    expose:
+      - 5432
+    ports:
+      - 5433:5432
+
+networks:
+  default:
+    driver: bridge
+
+volumes:
+  postgresql_db_data:
+
