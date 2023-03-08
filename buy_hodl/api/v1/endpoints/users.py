@@ -3,9 +3,6 @@ from fastapi import APIRouter, Depends, HTTPException
 from buy_hodl import schemas, crud, models
 from buy_hodl.api.dependencies import get_db, is_admin
 from sqlalchemy.orm import Session
-from buy_hodl.config import get_settings
-
-settings = get_settings()
 
 
 router = APIRouter(prefix="/users")
