@@ -20,6 +20,7 @@ node_modules/
 *.sqlite3
 *.sqlite
 *.sql
+!init.sql
 
 .data
 .env.stg
@@ -101,6 +102,9 @@ ipython_config.py
 
 # pyenv
 .python-version
+
+# asdf
+.tool-versions
 
 # celery beat schedule file
 celerybeat-schedule

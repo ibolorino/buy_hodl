@@ -5,6 +5,7 @@ from pydantic import BaseSettings, validator, PostgresDsn
 
 
 class Settings(BaseSettings):
+    API_V1_STR: str = "/api/v1"
     ENVIRONMENT: str = ''
     SERVICE_NAME: str = 'buy_hodl'
     VERSION: str = '1.0.0'
