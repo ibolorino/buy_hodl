@@ -15,3 +15,12 @@ def list_asset_types(
 ) -> Any:
     asset_types = crud.asset_type.get_multi(db, skip=skip, limit=limit)
     return asset_types
+
+@router.post("/", response_model=schemas.AssetType)
+def create_asset_type(
+    *,
+    db: Session = Depends(get_db),
+    asset_type_in: schemas.AssetTypeCreate
+) -> Any:
+    asset_type = crud.asset_type.create(db=db, obj_in=asset_type_in)
+    return asset_type
