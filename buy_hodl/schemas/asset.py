@@ -8,6 +8,7 @@ class AssetBase(BaseModel):
     name: Optional[str] = None
     ticker: Optional[str] = None
     current_price: Optional[Decimal] = None
+    asset_type_id: int
 
 
 # Properties to receive on asset_type creation
