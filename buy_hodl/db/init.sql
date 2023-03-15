@@ -47,5 +47,27 @@ create unique index asset_name_uindex
 create unique index asset_ticker_uindex
     on asset (ticker);
 
+create table wallet
+(
+    id         serial  not null
+        constraint wallet_pk
+            primary key,
+    asset_id   integer not null
+        constraint wallet_asset_id_fk
+            references asset,
+    user_id    integer not null
+        constraint wallet_user_id_fk
+            references "user",
+    quantity   integer default 0,
+    quarantine boolean default false
+);
+
+create index wallet_asset_id_index
+    on wallet (asset_id);
+
+create index wallet_user_id_index
+    on wallet (user_id desc);
+
+
 
 

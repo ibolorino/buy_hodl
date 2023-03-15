@@ -1,5 +1,6 @@
 from buy_hodl.db.base_class import Base
 from sqlalchemy import Boolean, Column, Integer, String
+from sqlalchemy.orm import relationship
 
 
 class User(Base):
@@ -9,3 +10,4 @@ class User(Base):
     hashed_password = Column(String, nullable=False)
     is_active = Column(Boolean(), default=True)
     is_superuser = Column(Boolean(), default=False)
+    wallet = relationship("Wallet", back_populates="user")
