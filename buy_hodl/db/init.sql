@@ -60,6 +60,9 @@ create table wallet
             references "user",
     quantity   integer default 0,
     quarantine boolean default false
+
+    constraint wallet_unique_asset_user_key
+        unique (asset_id, user_id)
 );
 
 create index wallet_asset_id_index
@@ -67,6 +70,7 @@ create index wallet_asset_id_index
 
 create index wallet_user_id_index
     on wallet (user_id desc);
+
 
 
 

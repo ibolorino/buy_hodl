@@ -27,3 +27,30 @@ def list_wallet(
 ) -> Any:
     wallet = crud.wallet.create(db=db, obj_in=wallet_in, user_id=current_user.id)
     return wallet
+
+@router.put("/{id}", response_model=schemas.Wallet)
+def update_wallet(
+    *,
+    db: Session = Depends(get_db),
+    id: int,
+    wallet_in: schemas.WalletUpdate,
+    current_user: models.User = Depends(is_authenticated),
+) -> Any:
+    wallet = crud.wallet.get_by_owner(db=db, id=id, user_id=current_user.id)
+    if not wallet:
+        raise HTTPException(status_code=404, detail="Asset not found in Wallet")
+    wallet = crud.wallet.update(db=db, db_obj=wallet, obj_in=wallet_in)
+    return wallet
+
+@router.delete("/{id}", response_model=schemas.Wallet)
+def delete_wallet(
+    *,
+    db: Session = Depends(get_db),
+    id: int,
+    current_user: models.User = Depends(is_authenticated),
+) -> Any:
+    wallet = crud.wallet.get_by_owner(db=db, id=id, user_id=current_user.id)
+    if not wallet:
+        raise HTTPException(status_code=404, detail="Asset not found in Wallet")
+    wallet = crud.wallet.remove(db=db, id=id)
+    return wallet

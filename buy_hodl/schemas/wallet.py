@@ -5,7 +5,6 @@ from typing import Optional
 class WalletBase(BaseModel):
     quantity: Optional[int] = None
     quarantine: Optional[bool] = None
-    asset_id: Optional[int] = None
 
 
 class WalletCreate(WalletBase):
