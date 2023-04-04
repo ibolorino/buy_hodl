@@ -13,13 +13,14 @@ RUN mkdir -p $DEPLOY_PATH
 ADD buy_hodl/ $DEPLOY_PATH/buy_hodl
 ADD wsgi.py $DEPLOY_PATH/wsgi.py
 ADD setup.cfg $DEPLOY_PATH/setup.cfg
+ADD requirements-dev.txt $DEPLOY_PATH/requirements-dev.txt
 ADD requirements.txt $DEPLOY_PATH/requirements.txt
 
 WORKDIR $DEPLOY_PATH
 
 RUN pip install --upgrade pip
 RUN pip install -U setuptools wheel
-RUN pip install -r requirements.txt
+RUN pip install -r requirements-dev.txt
 
 EXPOSE 8000
 
