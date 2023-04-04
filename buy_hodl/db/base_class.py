@@ -1,4 +1,5 @@
 from typing import Any
+import re
 
 from sqlalchemy.ext.declarative import as_declarative, declared_attr
 
@@ -9,4 +10,6 @@ class Base:
 
     @declared_attr
     def __tablename__(cls) -> str:
-        return cls.__name__.lower()
+        pattern = re.compile(r"(?<!^)(?=[A-Z])")
+        table_name = pattern.sub("_", cls.__name__).lower().replace("__", "_")
+        return table_name
